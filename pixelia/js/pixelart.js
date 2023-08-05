@@ -140,13 +140,13 @@ const switchTool = (toolId, caller) =>
     {
         case 0:
             currentTool = 0;
-            canvas.style.cursor = "url('/img/pixelart/paint.png'), auto";
+            canvas.style.cursor = "url('/img/paint.png'), auto";
             changeUISelectedTool(caller);
             break;
 
         case 1:
             currentTool = 1;
-            canvas.style.cursor = "url('/img//pixelart/erase.png'), auto";
+            canvas.style.cursor = "url('/img/erase.png'), auto";
             changeUISelectedTool(caller);
             break;
     }
