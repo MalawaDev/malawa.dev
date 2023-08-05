@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Pixelia</title>
+
+    <!-- Links -->
+    <link rel="stylesheet" href="/css/pixelia.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+
+    <!-- OpenGraph -->
+    <meta name="og:title" content="Pixelia">
+    <meta name="og:description" content="Una aplicación web de pixelarts">
+    <meta name="og:image" content="/img/favicon.ico">
+    <meta name="og:url" content="https://pixelia.malawa.dev">
+
+    <!-- Red social de gente tilteada y artistas furros -->
+    <meta name="twitter:title" content="Pixelia">
+    <meta name="twitter:description" content="Una aplicación web de pixelarts">
+    <meta name="twitter:url" content="https://pixelia.malawa.dev">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@malawa_">
+</head>
+
+<body>
+    <div id="bar">
+        <div id="textoptions">
+            <input type="file" id="paletteinput" accept="image/png">
+            <label for="paletteinput" id="palettelabel" title="Tiene que ser de 1px, puedes encontrar en Lospec">Ingresar paleta</label>
+            <a id="pixelartdownload">
+                <button onclick="downloadPixelart()">Descargar Pixelart</button>
+            </a>
+        </div>
+        
+        <div id="toolkit">
+            <button onclick="switchTool(0, this)" id="brushbutton">
+                <img src="/img/pixelart/button/brush.png" alt="Pincel">
+                <span>B</span>
+            </button>
+            <button onclick="switchTool(1, this)" id="eraserbutton">
+                <img src="/img/pixelart/button/eraser.png" alt="Borrador">
+                <span>E</span>
+            </button>
+        </div>
+
+        <input type="color" name="" id="colorinput">
+    </div>
+</body>
+<script src="/js/pixelart.js"></script>
+</html>

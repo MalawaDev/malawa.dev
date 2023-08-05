@@ -1,0 +1,563 @@
+*
+{
+    font-family: "Nunito";
+}
+
+:root
+{
+    --outline-color: black;
+    --outline-width: 1px;
+}
+
+::-webkit-scrollbar
+{
+    width: 7px;
+}
+
+::-webkit-scrollbar-thumb
+{
+    background-color: #7795f0;
+}
+
+::-webkit-scrollbar-track
+{
+    background-color: #091420;
+}
+
+::-webkit-scrollbar-thumb:hover 
+{
+    background: #9eb6ff;
+}
+
+html /* Mozila's engine does not use ::-webkit-scrollbar */
+{
+    scrollbar-color: #7795f0 #091420;
+    scrollbar-width: thin;
+}
+
+body
+{
+    width: 100vw;
+    height: 100vh;
+    background-color: #131313;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, p, a
+{
+    cursor: default;
+    user-select: none;
+}
+
+.emoji
+{
+    background-clip: unset;
+    -webkit-text-fill-color: #ffffff7c;
+    -webkit-background-clip: unset;
+    background: unset;
+}
+
+.outlined
+{
+    text-shadow: var(--outline-width) var(--outline-width) 0 var(--outline-color), var(--outline-width) 0px 0 var(--outline-color), var(--outline-width) calc(-1 * var(--outline-width)) 0 var(--outline-color), 0px var(--outline-width) 0 var(--outline-color), 0px calc(-1 * var(--outline-width)) 0 var(--outline-color), calc(-1 * var(--outline-width)) var(--outline-width) 0 var(--outline-color), calc(-1 * var(--outline-width)) 0px 0 var(--outline-color), calc(-1 * var(--outline-width)) calc(-1 * var(--outline-width)) 0 var(--outline-color);
+}
+
+/* Background */
+#backgroundimg
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url("/img/launcherbg.svg");
+    background-size: cover;
+    z-index: -999;
+    background-position-y: bottom;
+}
+
+/* Leftbar */
+#leftbar
+{
+    position: fixed;
+    left: 0;
+    width: 23vw;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+}
+
+#leftbar h1, #leftbar h2, #leftbar h3, #leftbar p
+{
+    background: -webkit-linear-gradient(237deg, #ffffff, #86b1e1);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#leftbar>hr
+{
+    width: 80%;
+    border: 1px solid #86b1e1;
+}
+
+#title
+{
+    font-size: 5rem;
+    margin-bottom: 30px;
+}
+
+#addtostart
+{
+    display: none;
+}
+
+#addtostart h3, #addtostart p
+{
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.bottom
+{
+    margin-top: auto;
+}
+
+#toggleleftbar
+{
+    position: absolute;
+    background: none;
+    width: 40px;
+    height: 30px;
+    left: 27vw;
+    top: 2vh;
+    color: #606060;
+    padding-inline: 10px;
+    border: 1px solid #606060;
+    border-radius: 5px;
+}
+
+/* Content */
+#content
+{
+    width: 70vw;
+    height: 100vh;
+    right: 0;
+    position: absolute;
+}
+
+/* Panel */
+#panel
+{
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    top: 200px;
+    width: 50vw;
+    height: 60vh;
+    background: linear-gradient(113deg, #759dd1, #8647a3);
+    z-index: 999;
+    border-radius: 4px;
+    box-shadow: 3px 3px 5px #0e0e0e;
+    animation: panelToggle 250ms linear;
+}
+
+#paneltopbar
+{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 4%;
+    background-color: #1c074582;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+#paneltopbar>h1
+{
+    color: #e4e4e4;
+    font-size: 1.2rem;
+    margin: 0;
+    margin-left: 10px;
+}
+
+#closepanel
+{
+    padding-inline: 15px;
+    background: none;
+    border: none;
+    color: #bbbbbb;
+    border-top-right-radius: 4px;
+}
+
+#closepanel:hover
+{
+    background: #ff000077;
+}
+
+/* Websites */
+#websites
+{
+    display: flex;
+    height: 80%;
+    flex-wrap: wrap;
+    margin-top: 10vh;
+    align-content: flex-start;
+    align-items: center;
+}
+
+.website
+{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 165px;
+    height: 100px;
+    background: var(--background);
+    padding: 20px;
+    /* box-shadow: 8px 9px 2px #551b1b */
+    border-radius: 5px;
+    margin: 30px;
+    cursor: pointer;
+}
+
+.website a, h1, h2, h3
+{
+    color: white; 
+}
+
+.website:hover
+{
+    filter: brightness(1.2);
+    scale: 1.2;
+}
+
+.website h1
+{
+    cursor: pointer;
+}
+
+#create
+{
+    border: 6px dashed white;
+    width: 165px;
+    height: 100px;
+    padding: 0;
+    margin: 45px;
+}
+
+#deletepin
+{
+    position: fixed;
+    display: none;
+    color: #b53b3b;
+    top: 0;
+}
+
+/* Create Pin */
+#addpin
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#addpin>div
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40%;
+}
+
+#addpin>hr
+{
+    width: 30%;
+}
+
+#addpin h1
+{
+    margin: 0;
+}
+
+#nameinputdiv
+{
+    margin-top: 30px;
+}
+
+#nameinput
+{
+    background: none;
+    border: 1px solid #cea4d8;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    background-color: #f9e3e375;
+    color: white;
+    box-shadow: 1px 1px 3px #e9c5c5c7;
+}
+
+#urlinputdiv
+{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#urlinput
+{
+    background: none;
+    border: 1px solid #cea4d8;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    background-color: #f9e3e375;
+    color: white;
+    box-shadow: 1px 1px 3px #e9c5c5c7;
+}
+
+#urlinputdiv h3
+{
+    color: #e1e1e14a;
+    margin-left: auto;
+}
+
+#gradientinput
+{
+    display: flex;
+    flex-direction: column;
+}
+
+#gradientinput h1
+{
+    margin: 10px;
+}
+
+#gradientinfo
+{
+    display: flex;
+    align-items: center;
+}
+
+#gradientinfo h3
+{
+    margin-inline: 10px;
+}
+
+#gradientinfo input[type=color]
+{
+    border: 1px solid #cea4d8;
+    border-radius: 3px;
+    color: transparent;
+    appearance: none;
+    background-color: transparent;
+    height: 50px;
+    width: 50px;
+}
+
+#gradientdegreeinput
+{
+    width: 20%;
+    background: none;
+    border: 1px solid #cea4d8;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    background-color: #f9e3e375;
+    color: white;
+    box-shadow: 1px 1px 3px #e9c5c5c7;
+}
+
+#gradientpreview
+{
+    width: 150px;
+    height: 105px;
+    background: linear-gradient(120deg, #6eec8e, #3169bd);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#addpinbutton
+{
+    background: none;
+    border: 1px solid #cea4d8;
+    padding: 10px;
+    margin-top: 40px;
+    font-size: 2rem;
+    border-radius: 5px;
+    background-color: #f9e3e375;
+    color: white;
+    padding-inline: 35px;
+    box-shadow: 1px 1px 3px #e9c5c5c7;
+    cursor: pointer;
+}
+
+#errormessage
+{
+    color: #a90000;
+}
+
+/* Media */
+@media only screen and (max-width: 900px) 
+{
+    #backgroundimg 
+    {
+        rotate: 90deg;
+        top: -40vh;
+    }
+
+    #leftbar
+    {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        width: 100vw;
+    }
+
+    #toggleleftbar
+    {
+        display: none;
+    }
+
+    #leftbar h1
+    {
+        font-size: 3rem;
+        margin: 10px;
+    }
+
+    #leftbar h2, #leftbar h3
+    {
+        margin: 0;
+    }
+
+    #leftbar p
+    {
+        margin-top: 10vh;
+    }
+
+    #leftbar hr
+    {
+        display: none;
+    }
+
+    #content
+    {
+        width: 100vw;
+    }
+
+    #websites
+    {
+        height: fit-content;
+        margin-top: 30vh;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+    }
+
+    #toggleAddToStart
+    {
+        display: none;
+    }
+
+    #deletepin
+    {
+        top: 95vh;
+        font-size: 1rem;
+        width: 100vw;
+        justify-content: center;
+    }
+
+    #panel
+    {
+        width: 95vw;
+    }
+
+    #paneltopbar>h1
+    {
+        font-size: 1rem;
+    }
+
+    #addpin
+    {
+        width: 95vw;
+    }
+
+    #addpin h1
+    {
+        font-size: 1.5rem;
+        margin-inline: 2%;
+    }
+
+    #addpin hr
+    {
+        display: none;
+    }
+
+    #addpin>div
+    {
+        width: 100%;
+    }
+
+    #nameinput, #urlinput
+    {
+        width: 50%;
+        margin-right: 2%;
+    }
+
+    #urlinputdiv
+    {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    #gradientinput>h1
+    {
+        display: none;
+    }
+
+    #gradientinfo>input[type=color] 
+    {
+        height: 45px;
+        width: 65px;
+    }
+
+    #addpinbutton
+    {
+        margin-top: 10px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Animations */
+@keyframes panelToggle 
+{
+    from
+    {
+        filter: opacity(0);
+        transform: translateY(80px);
+    }
+    
+    to
+    {
+        filter: opacity(1);
+    }
+}
+
+@keyframes leftbarToggle 
+{
+    from
+    {
+        transform: translateX(0);
+    }
+    
+    to
+    {
+        transform: translateX(-30vw);
+    }
+}

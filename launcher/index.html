@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Malawa • Launcher</title>
+
+    <!-- Links -->
+    <link rel="stylesheet" href="/css/launcher.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div id="backgroundimg"></div>
+
+    <button id="toggleleftbar" onclick="toggleLeftbar()"><</button>
+
+    <div id="leftbar">
+        <h1 id="title">Launcher</h1>
+        <h3>Acceso rápido a tus sitios favoritos <span class="emoji">🌠</span></h3>
+        <hr>
+        <h3 id="toggleAddToStart" onclick="toggleAddToStart()">> Cómo añadir al inicio</h3>
+        <div id="addtostart">
+            <h3>Edge / Chrome</h3>
+            <p>
+                Entra al menú ⋮ en la esquina superior derecha
+                <br>
+                Selecciona "Configuración"
+                <br>
+                Clickea "Página de inicio [...]"
+                <br>
+                Añade "https://launcher.malawa.dev" en los espacios
+            </p>
+            <br>
+            <h3>Firefox</h3>
+            <p>
+                Entra al menú ☰ en la esquina superior derecha
+                <br>
+                Selecciona "Ajustes"
+                <br>
+                Clickea "Inicio"
+                <br>
+                Añade "https://launcher.malawa.dev" en los espacios
+            </p>
+        </div>
+        <hr class="bottom">
+        <p>Hecho con <span class="emoji">💕</span> por <a href="https://www.malawa.dev/">Malawa</a></p>
+    </div>
+
+    <div id="content">
+        <div id="websites">
+            <div id="create" class="website" onclick="createWebsitePin()">
+                <h1>+</h1>
+            </div>
+        </div>
+        <h2 id="deletepin">Presiona [Delete] para eliminar el pin</h2>
+    </div>
+
+    <div id="panel">
+        <div id="paneltopbar">
+            <h1>Añadir acceso rápido</h1>
+            <button id="closepanel" onclick="togglePanel()">X</button>
+        </div>
+        <div id="addpin">
+            <div id="nameinputdiv">
+                <h1>Nombre</h1>
+                <input type="text" name="" id="nameinput">
+            </div>
+            <div id="urlinputdiv">
+                <h1>URL</h1>
+                <h3>https://</h3>
+                <input type="text" name="" id="urlinput">
+            </div>
+            <hr>
+            <div id="gradientinput">
+                <h1>Gradiente</h1>
+                <div id="gradientpreview"></div>
+                <div id="gradientinfo">
+                    <h3>De</h3>
+                    <input type="color" id="gradientcol1input" value="#6eec8e" oninput="updateGradientPreview()">
+                    <h3>a</h3>
+                    <input type="color" id="gradientcol2input" value="#3169bd" oninput="updateGradientPreview()">
+                    <h3>en</h3>
+                    <input type="text" id="gradientdegreeinput" inputmode="numeric" value="120" oninput="updateGradientPreview()">
+                    <h3>grados</h3>
+                </div>
+            </div>
+            <button id="addpinbutton" onclick="addPin()">Añadir</button>
+            <p id="errormessage"></p>
+        </div>
+    </div>
+
+    <script src="/js/launcher.js"></script>
+</body>
+
+</html>
