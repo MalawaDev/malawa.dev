@@ -22,6 +22,7 @@ body
     min-width: 1024px;
     min-height: 1024px;
     margin: 40px;
+    scale: 0.91;
 }
 
 .pixelartcanvas
@@ -159,7 +160,7 @@ body
 }
 
 /* Media */
-@media only screen and (max-width: 900px) 
+@media only screen and (max-width: 900px)
 {
     #bar 
     {

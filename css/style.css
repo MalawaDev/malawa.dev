@@ -149,7 +149,7 @@ body
 {
     position: fixed;
     bottom: -20px;
-    height: 850px;
+    height: 90vh;
     left: -50px;
     overflow: hidden;
 }
