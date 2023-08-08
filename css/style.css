@@ -119,6 +119,7 @@ body
     display: flex;
     flex-direction: column;
     justify-content: center;
+    z-index: 1;
 }
 
 #intro h1
@@ -149,7 +150,7 @@ body
 {
     position: fixed;
     bottom: -20px;
-    height: 90vh;
+    width: 42vw;
     left: -50px;
     overflow: hidden;
 }
@@ -160,6 +161,7 @@ body
     display: flex;
     width: 100%;
     justify-content: space-around;
+    z-index: 1;
 }
 
 .social
