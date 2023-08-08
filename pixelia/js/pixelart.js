@@ -1,7 +1,7 @@
 //* Variables initialization
 var drawing = false;
 var currentTool = 0; //* 0 = Brush, 1 = Eraser
-var currentColor;
+var currentColor = "#000000";
 
 //* Canvas creation
 const canvas = document.createElement("canvas");
@@ -16,9 +16,9 @@ wrapper.appendChild(canvas);
 const ctx = canvas.getContext("2d");
 ctx.translate(-0.5, -0.5);
 
-// This *SHOULD* be enough, but chromium doesn't give a shit and applies antialiasing anyways 🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕
+// This *SHOULD* be enough, but chromium doesn't care and applies antialiasing anyways
 ctx.imageSmoothingEnabled = false;
-// WHY THE FUCK this property exists if only firefox is going to use it
+// Why does this property exists if only firefox is going to use it
 
 // So we have to use SVG wizardry
 ctx.filter = "url(\'data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\"><filter id=\"f\" color-interpolation-filters=\"sRGB\"><feComponentTransfer><feFuncA type=\"discrete\" tableValues=\"0 1\"/></feComponentTransfer></filter></svg>#f\')";
@@ -32,11 +32,43 @@ const setPixel = (x, y, color) => {
 
 const removePixel = (x, y) => {
     //TODO: This is underoptimized
-    ctx.putImageData(ctx.createImageData(1,1), x, y);
+    ctx.putImageData(ctx.createImageData(1, 1), x, y);
 
     // Because this ⬇ doesn't work, only removes a little bit of alpha
     // ctx.clearRect(x, y, 1, 1); 
 }
+
+const fillFromPixel = (x, y) => {
+    var nodes = [];
+    nodes.push({
+        x: x,
+        y: y
+    });
+    ctx.beginPath();
+    ctx.fillStyle = currentColor;
+
+    const initialColor = ctx.getImageData(x, y, 1, 1).data;
+    ctx.fillRect(x, y, 1, 1);
+    nodes.push({ x: x - 1, y: y }, { x: x + 1, y: y }, { x: x, y: y - 1 }, { x: x, y: y + 1 });
+    const newColor = ctx.getImageData(x, y, 1, 1).data; // Easy convert to UInt8Array
+
+    while (nodes.length > 0) {
+        const currentNode = nodes[0];
+        if (currentNode.x < 0 || currentNode.y < 0 || currentNode.x > canvas.width || currentNode.y > canvas.height) {
+            nodes.shift();
+            continue;
+        }
+
+        if (JSON.stringify(ctx.getImageData(currentNode.x, currentNode.y, 1, 1).data) == JSON.stringify(initialColor)) { //? For some reason they aren't the same, so we need to convert them... what ??????? performance is tanking
+            if (JSON.stringify(ctx.getImageData(currentNode.x, currentNode.y, 1, 1).data) != JSON.stringify(newColor)) {
+                ctx.fillRect(currentNode.x, currentNode.y, 1, 1); //? Maybe we could use fillRect to fill rectangles instead of single pixels (optimizes something?)
+                nodes.push({ x: currentNode.x - 1, y: currentNode.y }, { x: currentNode.x + 1, y: currentNode.y }, { x: currentNode.x, y: currentNode.y - 1 }, { x: currentNode.x, y: currentNode.y + 1 });
+            }
+        }
+        nodes.shift();
+    }
+}
+
 
 //* Drawing logic
 const draw = (ev) => {
@@ -45,13 +77,17 @@ const draw = (ev) => {
 
     const x = (ev.clientX - rect.left) * canvas.width / rect.width;
     const y = (ev.clientY - rect.top) * canvas.height / rect.height;
-    
-    switch(currentTool) {
+
+    switch (currentTool) {
         case 0:
             setPixel(x, y, currentColor);
             break;
         case 1:
             removePixel(x, y);
+            break;
+
+        case 2:
+            fillFromPixel(x, y);
             break;
     }
 
@@ -62,7 +98,7 @@ document.onmousedown = (ev) => {
     drawing = true;
     draw(ev);
 }
-document.onmouseup = () => {drawing = false;}
+document.onmouseup = () => { drawing = false; }
 
 document.onmousemove = (ev) => {
     draw(ev);
@@ -75,6 +111,9 @@ document.onkeydown = (ev) => {
     }
     if (ev.key == "e") {
         switchTool(1, document.getElementById("eraserbutton"));
+    }
+    if (ev.key == "g") {
+        switchTool(2, document.getElementById("buckettool"));
     }
 }
 
@@ -94,7 +133,7 @@ document.getElementById("paletteinput").oninput = () => {
     }
 
     const paletteCanvas = document.createElement("canvas");
-    
+
     const paletteNode = document.createElement("div");
     paletteNode.id = "palette";
 
@@ -117,7 +156,7 @@ document.getElementById("paletteinput").oninput = () => {
             colorNode.src = colorCanvas.toDataURL("image/png");
             colorNode.onclick = (ev) => {
                 currentColor = `#${[...new Uint8Array(color)].map(x => x.toString(16).padStart(2, '0')).join('')}`;
-                document.getElementById("colorinput").value = currentColor.slice(0, currentColor.length-2);
+                document.getElementById("colorinput").value = currentColor.slice(0, currentColor.length - 2);
             }
             paletteNode.appendChild(colorNode);
         }
@@ -134,10 +173,8 @@ const downloadPixelart = () => {
 }
 
 //* Tools 
-const switchTool = (toolId, caller) =>
-{
-    switch(toolId)
-    {
+const switchTool = (toolId, caller) => {
+    switch (toolId) {
         case 0:
             currentTool = 0;
             canvas.style.cursor = "url('/img/paint.png'), auto";
@@ -147,6 +184,12 @@ const switchTool = (toolId, caller) =>
         case 1:
             currentTool = 1;
             canvas.style.cursor = "url('/img/erase.png'), auto";
+            changeUISelectedTool(caller);
+            break;
+
+        case 2:
+            currentTool = 2;
+            canvas.style.cursor = "url('/img/fill.png'), auto";
             changeUISelectedTool(caller);
             break;
     }

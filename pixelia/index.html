@@ -30,12 +30,13 @@
     <div id="bar">
         <div id="textoptions">
             <input type="file" id="paletteinput" accept="image/png">
-            <label for="paletteinput" id="palettelabel" title="Tiene que ser de 1px, puedes encontrar en Lospec">Ingresar paleta</label>
+            <label for="paletteinput" id="palettelabel"
+                title="Tiene que ser de 1px, puedes encontrar en Lospec">Ingresar paleta</label>
             <a id="pixelartdownload">
                 <button onclick="downloadPixelart()">Descargar Pixelart</button>
             </a>
         </div>
-        
+
         <div id="toolkit">
             <button onclick="switchTool(0, this)" id="brushbutton">
                 <img src="/img/button/brush.png" alt="Pincel">
@@ -45,10 +46,15 @@
                 <img src="/img/button/eraser.png" alt="Borrador">
                 <span>E</span>
             </button>
+            <button onclick="switchTool(2, this)" id="buckettool">
+                <img src="/img/button/bucket.png" alt="Cubo">
+                <span>G</span>
+            </button>
         </div>
 
         <input type="color" name="" id="colorinput">
     </div>
 </body>
 <script src="/js/pixelart.js"></script>
+
 </html>
