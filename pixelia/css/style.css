@@ -15,6 +15,12 @@ body
     justify-content: flex-end;
 }
 
+/* Tools */
+.shown
+{
+    display: flex !important;
+}
+
 /* Canvas */
 #canvaswrapper
 {
@@ -61,6 +67,7 @@ body
     align-items: center;
 }
 
+
 #colorinput
 {
     border: none;
@@ -73,12 +80,69 @@ body
     cursor: pointer;
 }
 
+#altcolorinput
+{
+    border: none;
+    padding: 0;
+    height: 64px;
+    width: 64px;
+    background: transparent;
+    margin-bottom: auto;
+    margin-top: 70px;
+    cursor: pointer;
+}
+
+#colorinputs>span
+{
+    color: white;
+}
+
 #textoptions
 {
     display: flex;
     width: 100%;
     justify-content: space-around;
     margin-top: 250px;
+}
+
+#resolutiondropdown
+{
+    position: relative;
+}
+
+#resolutiontext
+{
+    background: none;
+    border: none;
+    color: transparent;
+    font-size: 2rem;
+    background: -webkit-linear-gradient(283deg, #39a7d3, #7646eb);
+    -webkit-background-clip: text;
+    background-clip: text;
+    cursor: pointer;
+}
+
+#resolutionoptions
+{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    top: -9rem; /* 2 rem x span + 1 of margin*/
+    flex-direction: column;
+    align-items: center;
+}
+
+#resolutionoptions>button
+{
+    color: transparent;
+    border: none;
+    font-size: 2rem;
+    background: -webkit-linear-gradient(283deg, #39a7d3, #7646eb);
+    -webkit-background-clip: text;
+    background-clip: text;
+    cursor: pointer;
 }
 
 #pixelartdownload>button

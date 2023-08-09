@@ -1,7 +1,8 @@
 //* Variables initialization
 var drawing = false;
-var currentTool = 0; //* 0 = Brush, 1 = Eraser
-var currentColor = "#000000";
+var currentTool = 0; //* 0 = Brush, 1 = Eraser, 2 = Bucket
+var currentColor = "#131313";
+var currentAltColor = "#e3e3e3";
 
 //* Canvas creation
 const canvas = document.createElement("canvas");
@@ -27,7 +28,8 @@ ctx.filter = "url(\'data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\"
 const setPixel = (x, y, color) => {
     ctx.beginPath();
     ctx.fillStyle = color;
-    ctx.fillRect(x, y, 1, 1);
+    ctx.fillRect(Math.max(x), Math.max(y), 1, 1);
+    
 }
 
 const removePixel = (x, y) => {
@@ -69,6 +71,41 @@ const fillFromPixel = (x, y) => {
     }
 }
 
+//* Canvas properties editing
+const setResolution = (resolution) => {
+    canvas.width = resolution;
+    canvas.height = resolution;
+
+    if (resolution == 16)
+    {
+        [].slice.call(document.getElementsByClassName("pixelartcanvas")).forEach(c => {
+            c.style.backgroundSize = "128px 128px";
+            c.style.backgroundPosition = "0px 64px, 64px 0px";
+        });
+    }
+
+    if (resolution == 32)
+    {
+        [].slice.call(document.getElementsByClassName("pixelartcanvas")).forEach(c => {
+            c.style.backgroundSize = "64px 64px";
+            c.style.backgroundPosition = "0px 0px, 96px 32px";
+        });
+    }
+
+    if (resolution == 64)
+    {
+        [].slice.call(document.getElementsByClassName("pixelartcanvas")).forEach(c => {
+            c.style.backgroundSize = "32px 32px";
+            c.style.backgroundPosition = "0px 16px, 48px 32px";
+        });
+    }
+
+    document.getElementById("resolutiontext").innerText = `${resolution}x${resolution}`;
+
+    // Filter and translation resets on width changes
+    ctx.filter = "url(\'data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\"><filter id=\"f\" color-interpolation-filters=\"sRGB\"><feComponentTransfer><feFuncA type=\"discrete\" tableValues=\"0 1\"/></feComponentTransfer></filter></svg>#f\')";
+    ctx.translate(-0.5, -0.5);
+}
 
 //* Drawing logic
 const draw = (ev) => {
@@ -109,11 +146,17 @@ document.onkeydown = (ev) => {
     if (ev.key == "b") {
         switchTool(0, document.getElementById("brushbutton"));
     }
+
     if (ev.key == "e") {
         switchTool(1, document.getElementById("eraserbutton"));
     }
+
     if (ev.key == "g") {
         switchTool(2, document.getElementById("buckettool"));
+    }
+
+    if (ev.key == "x") {
+        swapCurrentColor();
     }
 }
 
@@ -156,7 +199,8 @@ document.getElementById("paletteinput").oninput = () => {
             colorNode.src = colorCanvas.toDataURL("image/png");
             colorNode.onclick = (ev) => {
                 currentColor = `#${[...new Uint8Array(color)].map(x => x.toString(16).padStart(2, '0')).join('')}`;
-                document.getElementById("colorinput").value = currentColor.slice(0, currentColor.length - 2);
+                currentColor = currentColor.slice(0, currentColor.length - 2);
+                document.getElementById("colorinput").value = currentColor;
             }
             paletteNode.appendChild(colorNode);
         }
@@ -207,5 +251,21 @@ const changeUISelectedTool = (caller) => {
     });
 }
 
+const swapCurrentColor = () => {
+    const cc = currentColor;
+    currentColor = currentAltColor;
+    currentAltColor = cc;
+
+    document.getElementById("colorinput").value = currentColor;
+    document.getElementById("altcolorinput").value = currentAltColor;
+}
+
+//* UI Functions
+const toggleResolutionOptions = () => {
+    document.getElementById("resolutionoptions").classList.toggle("shown");
+}
+
 //* Startup functions
 switchTool(0, document.getElementById("brushbutton"));
+document.getElementById("colorinput").value = currentColor;
+document.getElementById("altcolorinput").value = currentAltColor;

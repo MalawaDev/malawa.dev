@@ -29,6 +29,14 @@
 <body>
     <div id="bar">
         <div id="textoptions">
+            <div id="resolutiondropdown" name="Resolución" onclick="toggleResolutionOptions()">
+                <span id="resolutiontext">32x32</span>
+                <div id="resolutionoptions">
+                    <button onclick="setResolution(16)">16x16</button>
+                    <button onclick="setResolution(32)">32x32</button>
+                    <button onclick="setResolution(64)">64x64</button>
+                </div>
+            </div>
             <input type="file" id="paletteinput" accept="image/png">
             <label for="paletteinput" id="palettelabel"
                 title="Tiene que ser de 1px, puedes encontrar en Lospec">Ingresar paleta</label>
@@ -52,7 +60,11 @@
             </button>
         </div>
 
-        <input type="color" name="" id="colorinput">
+        <div id="colorinputs">
+            <input type="color" id="colorinput">
+            <input type="color" id="altcolorinput">
+            <span>X</span>
+        </div>
     </div>
 </body>
 <script src="/js/pixelart.js"></script>
