@@ -1,7 +1,13 @@
+@font-face 
+{
+    font-family: "Kubasta";
+    src: url("https://pixelia.malawa.dev/fonts/Kubasta.ttf");
+}
+
 *
 {
     image-rendering: pixelated;
-    font-family: "Nunito";
+    font-family: "Kubasta";
 }
 
 body

@@ -4,13 +4,11 @@
 <head>
     <!-- Meta -->
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Launcher</title>
 
     <!-- Links -->
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+    <link rel="stylesheet" href="https://malawa.dev/launcher/css/style.css">
     <link rel="shortcut icon" href="https://malawa.dev/img/favicon.ico" type="image/x-icon">
 
     <!-- OpenGraph -->
@@ -23,46 +21,10 @@
     <meta name="twitter:description" content="Acceso rápido a tus sitios favoritos 🌠">
     <meta name="twitter:url" content="https://launcher.malawa.dev">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@malawa_">
+    <meta name="twitter:site" content="@malawa_dev">
 </head>
 
 <body>
-    <div id="backgroundimg"></div>
-
-    <button id="toggleleftbar" onclick="toggleLeftbar()"><</button>
-
-    <div id="leftbar">
-        <h1 id="title">Launcher</h1>
-        <h3>Acceso rápido a tus sitios favoritos <span class="emoji">🌠</span></h3>
-        <hr>
-        <h3 id="toggleAddToStart" onclick="toggleAddToStart()">> Cómo añadir al inicio</h3>
-        <div id="addtostart">
-            <h3>Edge / Chrome</h3>
-            <p>
-                Entra al menú ⋮ en la esquina superior derecha
-                <br>
-                Selecciona "Configuración"
-                <br>
-                Clickea "Página de inicio [...]"
-                <br>
-                Añade "https://launcher.malawa.dev" en los espacios
-            </p>
-            <br>
-            <h3>Firefox</h3>
-            <p>
-                Entra al menú ☰ en la esquina superior derecha
-                <br>
-                Selecciona "Ajustes"
-                <br>
-                Clickea "Inicio"
-                <br>
-                Añade "https://launcher.malawa.dev" en los espacios
-            </p>
-        </div>
-        <hr class="bottom">
-        <p>Hecho con <span class="emoji">💕</span> por <a href="https://www.malawa.dev/">Malawa</a></p>
-    </div>
-
     <div id="content">
         <div id="websites">
             <div id="create" class="website" onclick="createWebsitePin()">
@@ -106,7 +68,7 @@
         </div>
     </div>
 
-    <script src="/js/launcher.js"></script>
+    <script src="https://malawa.dev/launcher/js/launcher.js"></script>
 </body>
 
 </html>

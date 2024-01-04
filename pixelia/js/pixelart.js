@@ -26,10 +26,11 @@ ctx.filter = "url(\'data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\"
 
 //* Canvas pixel manipulation
 const setPixel = (x, y, color) => {
+    
+    //TODO: (fix) This ⬇ uses a color blending filter and uses several colors
     ctx.beginPath();
     ctx.fillStyle = color;
     ctx.fillRect(Math.max(x), Math.max(y), 1, 1);
-    
 }
 
 const removePixel = (x, y) => {
@@ -142,7 +143,6 @@ document.onmousemove = (ev) => {
 }
 
 document.onkeydown = (ev) => {
-    //TODO: Harcoded keybinds ☠
     if (ev.key == "b") {
         switchTool(0, document.getElementById("brushbutton"));
     }
